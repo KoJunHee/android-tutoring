@@ -1,6 +1,8 @@
 package com.example.junhee.listviewapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,7 +52,7 @@ public class MyAdapter extends BaseAdapter {
 
         // findViewById
         ImageView iv_img = (ImageView) convertView.findViewById(R.id.iv_img);
-        TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
+        final TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
         TextView tv_contents = (TextView) convertView.findViewById(R.id.tv_contents);
 
         // 각 리스트에 뿌려줄 아이템을 받아오는데 mMyItem 재활용
@@ -66,6 +68,9 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(c, myItem.getName(), Toast.LENGTH_SHORT).show();
+                Intent myintent = new Intent(c, SecondActivity.class);
+                myintent.putExtra("key", tv_name.getText().toString());
+                ((Activity) c).startActivityForResult(myintent, 1);
             }
         });
 
